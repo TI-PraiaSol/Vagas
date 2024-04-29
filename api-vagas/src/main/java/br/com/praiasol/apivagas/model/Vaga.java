@@ -18,16 +18,16 @@ public class Vaga {
   private String nome;
 
   @Column(name = "FUNCAO_VAGA")
-  private Long funcao;
+  private String funcao;
 
   @Column(name = "EMPRESA_VAGA")
-  private Long empresa;
+  private String empresa;
 
   @Column(name = "AREA_VAGA")
-  private Long area;
+  private String area;
 
-  @Column(name = "STATUS_VAGA")
-  private Long status;
+  @Column(name = "ESTADO_VAGA")
+  private Integer estadoVaga;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "ID_TIPO_VAGA")

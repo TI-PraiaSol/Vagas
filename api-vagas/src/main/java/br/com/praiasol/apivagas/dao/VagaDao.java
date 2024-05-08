@@ -44,13 +44,27 @@ public class VagaDao {
   }
 
   public List<Vaga> buscarVaga(VagaTO vaga) {
-    String sql = "SELECT * \n\r"
-        + "FROM vaga \r\n"
+    String sql = "SELECT * \r\n"
+        + "FROM  RHDP_vaga \r\n"
         + "WHERE 1 = 1 \r\n"
         + "AND (id_vaga = :id OR :id IS NULL \r\n"
-        ;
+        + "AND (UPPER(nome_vaga) like CONCAT('%',UPPER(:vaga),'%') OR :vaga IS NULL) \r\n"
+        + "AND (UPPER(funcao_vaga) like CONCAT('%',UPPER(:funcao),'%') OR :funcao IS NULL) \r\n"
+        + "AND (UPPER(empresa_vaga) like CONCAT('%',UPPER(:empresa),'%') OR :empresa IS NULL) \r\n"
+        + "AND (UPPER(area_vaga) like CONCAT('%',UPPER(:area),'%') OR :area IS NULL) \r\n"
+
+        + "AND (id_tipo_vaga = :tipoVaga OR :tipoVaga IS NULL) \r\n";
+
     return manager.createNativeQuery(sql, Vaga.class)
         .setParameter("id", new TypedParameterValue<>(StandardBasicTypes.LONG, vaga.getId()))
+        .setParameter("vaga", new TypedParameterValue<>(StandardBasicTypes.STRING, vaga.getNome()))
+        .setParameter("funcao", new TypedParameterValue<>(StandardBasicTypes.STRING, vaga.getFuncao()))
+        .setParameter("empresa", new TypedParameterValue<>(StandardBasicTypes.STRING, vaga.getEmpresa()))
+        .setParameter("area", new TypedParameterValue<>(StandardBasicTypes.STRING, vaga.getArea()))
+        .setParameter("tipoVaga", new TypedParameterValue(StandardBasicTypes.LONG, vaga.getTipoVaga()))
+        .getResultList();
+
+
   }
 
 }

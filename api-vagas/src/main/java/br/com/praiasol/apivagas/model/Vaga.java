@@ -34,5 +34,7 @@ public class Vaga {
   private TipoVaga tipoVaga;
 
 
-  public Vaga(Long id) { this.id = id; }
+  public Vaga(Long id) {
+    this.id = id;
+  }
 }

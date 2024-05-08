@@ -11,4 +11,5 @@ public class VagaTO {
   private String empresa;
   private String area;
   private String estado;
+  private Long tipoVaga;
 }

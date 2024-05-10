@@ -6,7 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-import org.hibernate.query.TypedParameterValue;
+
+import org.hibernate.jpa.TypedParameterValue;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
@@ -39,7 +40,7 @@ public class VagaDao {
   public Vaga buscarVaga(Long id) throws NoResultException{
     String sql = "SELECT * FROM RHDP_vaga WHERE id_vaga = :id";
     return (Vaga) manager.createNativeQuery(sql, Vaga.class)
-        .setParameter("id", new TypedParameterValue<>(StandardBasicTypes.LONG, id))
+        .setParameter("id", new TypedParameterValue(StandardBasicTypes.LONG, id))
         .getSingleResult();
   }
   @SuppressWarnings("unchecked")

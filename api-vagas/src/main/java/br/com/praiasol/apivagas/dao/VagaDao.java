@@ -42,7 +42,7 @@ public class VagaDao {
         .setParameter("id", new TypedParameterValue<>(StandardBasicTypes.LONG, id))
         .getSingleResult();
   }
-
+  @SuppressWarnings("unchecked")
   public List<Vaga> buscarVaga(VagaTO vaga) {
     String sql = "SELECT * \r\n"
         + "FROM  RHDP_vaga \r\n"
@@ -56,14 +56,13 @@ public class VagaDao {
         + "AND (id_tipo_vaga = :tipoVaga OR :tipoVaga IS NULL) \r\n";
 
     return manager.createNativeQuery(sql, Vaga.class)
-        .setParameter("id", new TypedParameterValue<>(StandardBasicTypes.LONG, vaga.getId()))
-        .setParameter("vaga", new TypedParameterValue<>(StandardBasicTypes.STRING, vaga.getNome()))
-        .setParameter("funcao", new TypedParameterValue<>(StandardBasicTypes.STRING, vaga.getFuncao()))
-        .setParameter("empresa", new TypedParameterValue<>(StandardBasicTypes.STRING, vaga.getEmpresa()))
-        .setParameter("area", new TypedParameterValue<>(StandardBasicTypes.STRING, vaga.getArea()))
+        .setParameter("id", new TypedParameterValue(StandardBasicTypes.LONG, vaga.getId()))
+        .setParameter("vaga", new TypedParameterValue(StandardBasicTypes.STRING, vaga.getNome()))
+        .setParameter("funcao", new TypedParameterValue(StandardBasicTypes.STRING, vaga.getFuncao()))
+        .setParameter("empresa", new TypedParameterValue(StandardBasicTypes.STRING, vaga.getEmpresa()))
+        .setParameter("area", new TypedParameterValue(StandardBasicTypes.STRING, vaga.getArea()))
         .setParameter("tipoVaga", new TypedParameterValue(StandardBasicTypes.LONG, vaga.getTipoVaga()))
         .getResultList();
-
 
   }
 

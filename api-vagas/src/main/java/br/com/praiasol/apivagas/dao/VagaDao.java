@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public class VagaDao {
 
-  @PersistenceContext
+  /*@PersistenceContext
   private EntityManager manager;
 
   @Transactional
@@ -65,6 +65,6 @@ public class VagaDao {
         .setParameter("tipoVaga", new TypedParameterValue(StandardBasicTypes.LONG, vaga.getTipoVaga()))
         .getResultList();
 
-  }
+  }*/
 
 }
